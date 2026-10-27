@@ -36,6 +36,9 @@
       <label for="matricula">Matrícula:</label>
       <input id="matricula" type="text" placeholder="Ex: 202612345" />
 
+      <label for="frequencia">Frequencia (aulas frequentadas):</label>
+      <input id="frequencia" type="number" min="0" max="20" step="1"/>
+
       <label for="n1">Nota 1:</label>
       <input id="n1" type="number" min="0" max="10" step="0.1" />
 
@@ -72,6 +75,8 @@
         <p id="modal-nota1"></p>
         <p id="modal-nota2"></p>
         <p id="modal-nota3"></p>
+        <p id="modal-frequencia"></p>
+        <p id="modal-ranking"></p>
 
         <button class="btn-fechar" onclick="fecharDetalhes()">
           Fechar

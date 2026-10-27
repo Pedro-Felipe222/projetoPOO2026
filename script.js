@@ -52,17 +52,31 @@ function listar() {
 function detalharAluno(indice) {
   const aluno = turma[indice];
 
-  document.getElementById('modal-nome').textContent =
-    'Detalhes do aluno: ' + aluno.nome;
+  document.getElementById('modal-nome').innerHTML =
+    `Aluno: ${aluno.nome}<br>Matrícula: ${aluno.matricula}`;
 
   document.getElementById('modal-nota1').textContent =
-    'Nota 1: ' + aluno.nota1;
+    'Nota 1:  ' + aluno.nota1;
 
   document.getElementById('modal-nota2').textContent =
-    'Nota 2: ' + aluno.nota2;
+    'Nota 2:  ' + aluno.nota2;
 
   document.getElementById('modal-nota3').textContent =
-    'Nota 3: ' + aluno.nota3;
+    'Nota 3:  ' + aluno.nota3;
+  
+    const resultado = aluno.gerarEstadoFrequencia();
+
+  document.getElementById('modal-frequencia').textContent =
+    'Frequência: ' + aluno.frequencia +
+    '/20 aulas (' + resultado.percentual + '%)';
+
+  // Exibe a situação da frequência
+  document.getElementById('modal-ranking').textContent =
+    'Ranking: '
+  /*
+    resultado.estFrequencia
+      ? 'Frequência: Atingiu o mínimo de 70%'
+      : 'Frequência: Abaixo do mínimo de 70%'; */
 
   document.getElementById('modal-detalhes').classList.add('ativo');
 }
