@@ -24,12 +24,18 @@ class Aluno {
   gerarEstado(media) {
     let est;
 
-    if (media >= 6) {
-      est = 'Aprovado';
-    } else if (media >= 3) {
-      est = 'Recuperação';
-    } else {
+    if (media < 3) {
       est = 'Reprovado';
+    } else if (
+      this.nota1 < 4 ||
+      this.nota2 < 4 ||
+      this.nota3 < 4
+    ) {
+      est = 'Recuperação';
+    } else if (media >= 6) {
+      est = 'Aprovado';
+    } else {
+      est = 'Recuperação';
     }
 
     this.estado = est;

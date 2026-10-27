@@ -1,11 +1,11 @@
 // Exibe a lista de alunos
+
 function listar() {
   const btnCadastrar = document.getElementById('btn-cadastrar');
   const tabCadastrar = document.getElementById('tab-cadastrar');
   const btnListar = document.getElementById('btn-listar');
   const tabListar = document.getElementById('tab-listar');
 
-  // Troca a aba ativa
   btnListar.classList.add('active');
   btnCadastrar.classList.remove('active');
 
@@ -13,11 +13,8 @@ function listar() {
   tabCadastrar.classList.remove('active');
 
   const lista = document.getElementById('alunos');
-
-  // Limpa a lista anterior
   lista.innerHTML = '';
 
-  // Verifica se há alunos cadastrados
   if (turma.length === 0) {
     const item = document.createElement('li');
     item.textContent = 'Nenhum aluno cadastrado ainda.';
@@ -25,24 +22,56 @@ function listar() {
     return;
   }
 
-  // Percorre a turma e exibe os dados
   for (let i = 0; i < turma.length; i++) {
     const aluno = turma[i];
     const item = document.createElement('li');
 
-    item.textContent =
-      'Nome: ' +
-      aluno.nome +
-      ' | Matrícula: ' +
-      aluno.matricula +
-      ' | Média: ' +
-      aluno.media.toFixed(1) +
-      ' | Situação: ' +
-      aluno.estado;
+    const dados = document.createElement('div');
+    dados.textContent =
+      'Nome: ' + aluno.nome +
+      ' | Matrícula: ' + aluno.matricula +
+      ' | Média: ' + aluno.media.toFixed(2) +
+      ' | Situação: ' + aluno.estado;
 
+    const botao = document.createElement('button');
+    botao.textContent = 'Detalhar';
+    botao.classList.add('btn-detalhar');
+
+    botao.addEventListener('click', function () {
+      detalharAluno(i);
+    });
+
+    item.appendChild(dados);
+    item.appendChild(botao);
     lista.appendChild(item);
   }
 }
+
+// Exibe as notas do aluno em um pop-up
+
+function detalharAluno(indice) {
+  const aluno = turma[indice];
+
+  document.getElementById('modal-nome').textContent =
+    'Detalhes do aluno: ' + aluno.nome;
+
+  document.getElementById('modal-nota1').textContent =
+    'Nota 1: ' + aluno.nota1;
+
+  document.getElementById('modal-nota2').textContent =
+    'Nota 2: ' + aluno.nota2;
+
+  document.getElementById('modal-nota3').textContent =
+    'Nota 3: ' + aluno.nota3;
+
+  document.getElementById('modal-detalhes').classList.add('ativo');
+}
+
+function fecharDetalhes() {
+  document.getElementById('modal-detalhes').classList.remove('ativo');
+}
+
+
 
 // Volta para a aba de cadastro
 function cadastrar() {
