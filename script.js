@@ -28,8 +28,8 @@ function listar() {
 
     const dados = document.createElement('div');
     dados.textContent =
-      'Nome: ' + aluno.nome +
-      ' | Matrícula: ' + aluno.matricula +
+      'Nome: ' + aluno.getNome() +
+      ' | Matrícula: ' + aluno.getMatricula() +
       ' | Média: ' + aluno.media.toFixed(2) +
       ' | Situação: ' + aluno.estado;
 
@@ -53,21 +53,21 @@ function detalharAluno(indice) {
   const aluno = turma[indice];
 
   document.getElementById('modal-nome').innerHTML =
-    `Aluno: ${aluno.nome}<br>Matrícula: ${aluno.matricula}`;
+    `Aluno: ${aluno.getNome()}<br>Matrícula: ${aluno.getMatricula()}`;
 
   document.getElementById('modal-nota1').textContent =
-    'Nota 1:  ' + aluno.nota1;
+    'Nota 1:  ' + aluno.getNota1();
 
   document.getElementById('modal-nota2').textContent =
-    'Nota 2:  ' + aluno.nota2;
+    'Nota 2:  ' + aluno.getNota2();
 
   document.getElementById('modal-nota3').textContent =
-    'Nota 3:  ' + aluno.nota3;
+    'Nota 3:  ' + aluno.getNota3();
   
     const resultado = aluno.gerarEstadoFrequencia();
 
   document.getElementById('modal-frequencia').textContent =
-    'Frequência: ' + aluno.frequencia +
+    'Frequência: ' + aluno.getFrequencia() +
     '/20 aulas (' + resultado.percentual + '%)';
 
   // Exibe a situação da frequência

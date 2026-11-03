@@ -1,25 +1,25 @@
 
 class Aluno {
-  nome;
-  matricula;
-  frequencia;
-  nota1;
-  nota2;
-  nota3;
+  #nome;
+  #matricula;
+  #frequencia;
+  #nota1;
+  #nota2;
+  #nota3;
   estado;
   media;
 
   constructor(nome, matricula, frequencia, nota1, nota2, nota3) {
-    this.nome = nome;
-    this.matricula = matricula;
-    this.frequencia = frequencia;
-    this.nota1 = nota1;
-    this.nota2 = nota2;
-    this.nota3 = nota3;
+    this.#nome = nome;
+    this.#matricula = matricula;
+    this.#frequencia = frequencia;
+    this.#nota1 = nota1;
+    this.#nota2 = nota2;
+    this.#nota3 = nota3;
   }
 
   gerarMedia() {
-    let m = (this.nota1 + this.nota2 + this.nota3) / 3;
+    let m = (this.#nota1 + this.#nota2 + this.#nota3) / 3;
     this.media = m;
     return m;
   }
@@ -32,9 +32,9 @@ class Aluno {
     } else if (media < 3) {
       est = 'Reprovado';
     } else if (
-      this.nota1 < 4 ||
-      this.nota2 < 4 ||
-      this.nota3 < 4
+      this.#nota1 < 4 ||
+      this.#nota2 < 4 ||
+      this.#nota3 < 4
     ) {
       est = 'Recuperação';
     } else if (media >= 6) {
@@ -49,12 +49,49 @@ class Aluno {
 
   gerarEstadoFrequencia() {
     const aulasTotais = 20;
-    const percentual = (this.frequencia / aulasTotais) * 100;
+    const percentual = (this.#frequencia / aulasTotais) * 100;
 
     return {
       estFrequencia: percentual >= 70,
       percentual: percentual
     };
+  }
+
+  getNome() {
+    return this.#nome;
+  }
+  setNome(nome) {
+    this.#nome = nome;
+  }
+  getMatricula() {
+    return this.#matricula;
+  }
+  setMatricula(matricula) {
+    this.#matricula = matricula;
+  }
+  getFrequencia() {
+    return this.#frequencia;
+  }
+  setFrequencia(frequencia) {
+    this.#frequencia = frequencia;
+  }
+  getNota1() {
+    return this.#nota1;
+  }
+  setNota1(nota) {
+    this.#nota1 = nota;
+  }
+  getNota2() {
+    return this.#nota2;
+  }
+  setNota2(nota2) {
+    this.#nota2 = nota2;
+  }
+  getNota3() {
+    return this.#nota3;
+  }
+  setNota3(nota3) {
+    this.#nota3 = nota3;
   }
 }
 
