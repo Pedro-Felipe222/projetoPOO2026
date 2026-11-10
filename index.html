@@ -1,88 +1,162 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./styles.css" />
-    <script src="script.js">
-      defer
-    </script>
-    <script src="Aluno.js">
-      defer
-    </script>
-    <title>Sistema Escolar</title>
-  </head>
-  <body>
-    <!-- Botões para trocar de aba -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./styles.css" />
+
+  <script src="./Aluno.js" defer></script>
+  <script src="./script.js" defer></script>
+
+  <title>SIGAA 2</title>
+</head>
+
+<body>
+
+  <h1>SIGAA 2</h1>
+
+  <!-- Navegação principal -->
+  <div class="tabs-container" id="abas-principais">
+    <button class="tab-button active"
+      id="btn-nova-turma" onclick="mostrarCadastroTurma()">
+      Cadastrar Turma
+    </button>
+
+    <button class="tab-button"
+      id="btn-listar-turmas" onclick="mostrarTurmas()">
+      Listagem de Turmas
+    </button>
+  </div>
+
+  <!-- TELA DE CADASTRO DE TURMAS -->
+  <div id="tela-cadastro-turma" class="tab-content active">
+
+    <h2>Cadastrar Nova Turma</h2>
+
+    <label for="nome-turma">Nome da turma:</label>
+    <input id="nome-turma" type="text"
+      placeholder="Ex: 1A" />
+
+    <label for="nome-professor">Nome do professor:</label>
+    <input id="nome-professor" type="text"/>
+
+    <label for="nome-curso">Nome do curso:</label>
+    <input id="nome-curso" type="text"/>
+
+    <button onclick="salvarTurma()" class="btn-salvar">
+      Cadastrar Turma
+    </button>
+
+  </div>
+
+  <!-- TELA DE LISTAGEM DE TURMAS -->
+  <div id="tela-listar-turmas" class="tab-content">
+
+    <h2>Turmas Cadastradas</h2>
+
+    <ul id="lista-turmas" class="lista-alunos">
+      <li>Nenhuma turma cadastrada ainda.</li>
+    </ul>
+
+  </div>
+
+  <!-- TELA DE GERENCIAMENTO DOS ALUNOS -->
+  <div id="tela-alunos" class="tab-content">
+
+    <button onclick="voltarTurmas()" class="btn-voltar">
+      ⮜ 
+    </button>
+
+    <h2 id="titulo-turma">Turma</h2>
+    <p id="informacoes-turma"></p>
+
     <div class="tabs-container">
-      <button
-        class="tab-button active"
-        id="btn-cadastrar"
-        onclick="cadastrar()"
-      >
-        Cadastrar
+      <button class="tab-button active"
+        id="btn-cadastrar-aluno" onclick="cadastrar()">
+        Cadastrar Aluno
       </button>
 
-      <button class="tab-button" id="btn-listar" onclick="listar()">
+      <button class="tab-button"
+        id="btn-listar-alunos" onclick="listar()">
         Listar Alunos
       </button>
     </div>
 
-    <!-- Aba de cadastro -->
+    <!-- Cadastro de alunos -->
     <div id="tab-cadastrar" class="tab-content active">
+
       <label for="nome">Nome:</label>
       <input id="nome" type="text" placeholder="Nome do aluno" />
 
       <label for="matricula">Matrícula:</label>
-      <input id="matricula" type="text" placeholder="Ex: 202612345" />
+      <input id="matricula" type="text"
+        placeholder="Ex: 202612345" />
 
-      <label for="frequencia">Frequencia (aulas frequentadas):</label>
-      <input id="frequencia" type="number" min="0" max="20" step="1"/>
+      <label for="frequencia">
+        Frequência:
+      </label>
+      <input id="frequencia" type="number"
+        min="0" max="20" step="1" 
+        placeholder="Quantidade de aulas frequentadas"/>
 
       <label for="n1">Nota 1:</label>
-      <input id="n1" type="number" min="0" max="10" step="0.1" />
+      <input id="n1" type="number"
+        min="0" max="10" step="0.1" />
 
       <label for="n2">Nota 2:</label>
-      <input id="n2" type="number" min="0" max="10" step="0.1" />
+      <input id="n2" type="number"
+        min="0" max="10" step="0.1" />
 
       <label for="n3">Nota 3:</label>
-      <input id="n3" type="number" min="0" max="10" step="0.1" />
+      <input id="n3" type="number"
+        min="0" max="10" step="0.1" />
 
-      <button onclick="salvar()" class="btn-salvar">Salvar Aluno</button>
+      <button onclick="salvar()" class="btn-salvar">
+        Salvar Aluno
+      </button>
+
     </div>
 
-    <!-- Aba de listagem -->
+    <!-- Listagem de alunos -->
     <div id="tab-listar" class="tab-content">
+
       <h3>Alunos Cadastrados</h3>
 
       <ul id="alunos" class="lista-alunos">
         <li>Nenhum aluno cadastrado ainda.</li>
       </ul>
+
     </div>
 
-    <script src="./script.js"></script>
+  </div>
 
-    
-    <!-- Modal de detalhes do aluno -->
-    <div id="modal-detalhes" class="modal">
-      <div class="modal-conteudo">
-        <button class="modal-fechar" onclick="fecharDetalhes()">
-          &times;
-        </button>
+  <!-- MODAL DE DETALHES DO ALUNO -->
+  <div id="modal-detalhes" class="modal">
 
-        <h2 id="modal-nome">Detalhes do aluno</h2>
+    <div class="modal-conteudo">
 
-        <p id="modal-nota1"></p>
-        <p id="modal-nota2"></p>
-        <p id="modal-nota3"></p>
-        <p id="modal-frequencia"></p>
-        <p id="modal-ranking"></p>
+      <button class="modal-fechar"
+        onclick="fecharDetalhes()">
+        &times;
+      </button>
 
-        <button class="btn-fechar" onclick="fecharDetalhes()">
-          Fechar
-        </button>
-      </div>
+      <h2 id="modal-nome">Detalhes do aluno</h2>
+
+      <p id="modal-nota1"></p>
+      <p id="modal-nota2"></p>
+      <p id="modal-nota3"></p>
+      <p id="modal-media"></p>
+      <p id="modal-frequencia"></p>
+      <p id="modal-situacao"></p>
+
+      <button class="btn-fechar"
+        onclick="fecharDetalhes()">
+        Fechar
+      </button>
+
     </div>
+  </div>
 
-  </body>
+</body>
 </html>

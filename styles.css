@@ -2,7 +2,7 @@
 body {
   font-family: Arial, sans-serif;
   padding: 20px;
-  max-width: 350px; /* Aumentado levemente para acomodar as abas */
+  max-width: 350px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -203,4 +203,92 @@ input:focus {
     opacity: 1;
     transform: scale(1);
   }
+}
+
+
+/* Títulos */
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+h2 {
+  color: #333;
+}
+
+/* Informações da turma */
+#informacoes-turma {
+  color: #666;
+  font-size: 14px;
+}
+
+/* Itens da lista de turmas */
+#lista-turmas li {
+  padding: 15px;
+  margin-bottom: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fafafa;
+}
+
+#lista-turmas li strong {
+  font-size: 18px;
+  color: #333;
+}
+
+#lista-turmas li p {
+  margin: 7px 0;
+  color: #555;
+}
+
+/* Botão para voltar */
+.btn-voltar {
+  padding: 9px 12px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+.btn-voltar:hover {
+  background-color: #545b62;
+}
+
+/* Ajuste das listas */
+.lista-alunos {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.lista-alunos li {
+  overflow-wrap: anywhere;
+}
+
+/* Ajuste para telas pequenas */
+@media (max-width: 480px) {
+  body {
+    padding: 12px;
+  }
+
+  .tabs-container {
+    flex-wrap: wrap;
+  }
+
+  .tab-button {
+    font-size: 12px;
+  }
+}
+
+#titulo-turma {
+  text-align: center;
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
+#informacoes-turma {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 20px;
 }

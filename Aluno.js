@@ -6,6 +6,7 @@ class Aluno {
   #nota1;
   #nota2;
   #nota3;
+
   estado;
   media;
 
@@ -26,8 +27,10 @@ class Aluno {
 
   gerarEstado(media) {
     const resultadoFrequencia = this.gerarEstadoFrequencia();
+
     let est;
-    if(!resultadoFrequencia.estFrequencia) {
+
+    if (!resultadoFrequencia.estFrequencia) {
       est = 'Reprovado por frequência';
     } else if (media < 3) {
       est = 'Reprovado';
@@ -57,124 +60,45 @@ class Aluno {
     };
   }
 
-  getNome() {
-    return this.#nome;
+  getNome() { return this.#nome; }
+  getMatricula() { return this.#matricula; }
+  getFrequencia() { return this.#frequencia; }
+  getNota1() { return this.#nota1; }
+  getNota2() { return this.#nota2; }
+  getNota3() { return this.#nota3; }
+
+  setNome(nome) { this.#nome = nome; }
+  setMatricula(matricula) { this.#matricula = matricula; }
+  setFrequencia(frequencia) { this.#frequencia = frequencia; }
+  setNota1(nota) { this.#nota1 = nota; }
+  setNota2(nota) { this.#nota2 = nota; }
+  setNota3(nota) { this.#nota3 = nota; }
+}
+
+
+// Nova classe: Turma
+class Turma {
+  constructor(nome, professor, curso) {
+    this.nome = nome;
+    this.professor = professor;
+    this.curso = curso;
+
+    // Cada turma possui sua própria lista de alunos
+    this.alunos = [];
   }
-  setNome(nome) {
-    this.#nome = nome;
+
+  adicionarAluno(aluno) {
+    this.alunos.push(aluno);
   }
-  getMatricula() {
-    return this.#matricula;
-  }
-  setMatricula(matricula) {
-    this.#matricula = matricula;
-  }
-  getFrequencia() {
-    return this.#frequencia;
-  }
-  setFrequencia(frequencia) {
-    this.#frequencia = frequencia;
-  }
-  getNota1() {
-    return this.#nota1;
-  }
-  setNota1(nota) {
-    this.#nota1 = nota;
-  }
-  getNota2() {
-    return this.#nota2;
-  }
-  setNota2(nota2) {
-    this.#nota2 = nota2;
-  }
-  getNota3() {
-    return this.#nota3;
-  }
-  setNota3(nota3) {
-    this.#nota3 = nota3;
+
+  getAlunos() {
+    return this.alunos;
   }
 }
 
 
-// Array que armazena os alunos cadastrados
-let turma = [];
+// Array que armazena todas as turmas
+let turmas = [];
 
-// Cadastra um aluno
-
-function salvar() {
-  let nome = document.getElementById('nome').value.trim();
-  let matricula = document.getElementById('matricula').value.trim();
-  let frequencia = document.getElementById('frequencia').value;
-  let n1 = document.getElementById('n1').value;
-  let n2 = document.getElementById('n2').value;
-  let n3 = document.getElementById('n3').value;
-
-  // Verifica se todos os campos foram preenchidos
-  if (
-    nome === '' ||
-    matricula === '' ||
-    frequencia === '' ||
-    n1 === '' ||
-    n2 === '' ||
-    n3 === ''
-  ) {
-    alert('Preencha todos os campos!');
-    return;
-  }
-
-  // Converte os valores para números
-  frequencia = Number(frequencia);
-  n1 = Number(n1);
-  n2 = Number(n2);
-  n3 = Number(n3);
-
-  // Valida a frequência
-  if (
-    !Number.isInteger(frequencia) ||
-    frequencia < 0 ||
-    frequencia > 20
-  ) {
-    alert('A frequência deve ser um número inteiro entre 0 e 20!');
-    return;
-  }
-
-  // Valida as notas
-  if (
-    [n1, n2, n3].some(
-      nota => !Number.isFinite(nota) || nota < 0 || nota > 10
-    )
-  ) {
-    alert('As notas devem estar entre 0 e 10!');
-    return;
-  }
-
-  // Cria o aluno incluindo a frequência
-  let a1 = new Aluno(
-    nome,
-    matricula,
-    frequencia,
-    n1,
-    n2,
-    n3
-  );
-
-  // Calcula a média e as situações
-  let m = a1.gerarMedia();
-  a1.gerarEstado(m);
-  a1.gerarEstadoFrequencia();
-
-  // Salva o aluno
-  turma.push(a1);
-
-  alert('Aluno cadastrado com sucesso!');
-
-  // Limpa os campos
-  document.getElementById('nome').value = '';
-  document.getElementById('matricula').value = '';
-  document.getElementById('frequencia').value = '';
-  document.getElementById('n1').value = '';
-  document.getElementById('n2').value = '';
-  document.getElementById('n3').value = '';
-
-  document.getElementById('nome').focus();
-}
+// Índice da turma atualmente selecionada
+let turmaAtual = null;
