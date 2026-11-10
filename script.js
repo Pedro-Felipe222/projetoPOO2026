@@ -2,6 +2,7 @@
 // ========================================
 // NAVEGAÇÃO ENTRE AS TELAS PRINCIPAIS
 // ========================================
+let alunoSelecionado = null;
 
 function trocarTela(tela) {
   document.querySelectorAll('#abas-principais .tab-button')
@@ -317,18 +318,22 @@ function atualizarListaAlunos() {
 function detalharAluno(indice) {
   const aluno = turmas[turmaAtual].alunos[indice];
 
+  // Guarda o índice do aluno que está sendo editado
+  alunoSelecionado = indice;
+
   document.getElementById('modal-nome').textContent =
     'Aluno: ' + aluno.getNome() +
     ' | Matrícula: ' + aluno.getMatricula();
 
-  document.getElementById('modal-nota1').textContent =
-    'Nota 1: ' + aluno.getNota1();
+  // Preenche os campos com as notas atuais
+  document.getElementById('modal-nota1').value =
+    aluno.getNota1();
 
-  document.getElementById('modal-nota2').textContent =
-    'Nota 2: ' + aluno.getNota2();
+  document.getElementById('modal-nota2').value =
+    aluno.getNota2();
 
-  document.getElementById('modal-nota3').textContent =
-    'Nota 3: ' + aluno.getNota3();
+  document.getElementById('modal-nota3').value =
+    aluno.getNota3();
 
   document.getElementById('modal-media').textContent =
     'Média: ' + aluno.media.toFixed(2);
@@ -358,3 +363,54 @@ function fecharDetalhes() {
 document.addEventListener('DOMContentLoaded', function () {
   mostrarCadastroTurma();
 });
+
+
+
+function salvarAlteracoes() {
+
+  if (alunoSelecionado === null || turmaAtual === null) {
+    return;
+  }
+
+  const aluno = turmas[turmaAtual].alunos[alunoSelecionado];
+
+  const n1 = document.getElementById('modal-nota1').value;
+  const n2 = document.getElementById('modal-nota2').value;
+  const n3 = document.getElementById('modal-nota3').value;
+
+  if (n1 === '' || n2 === '' || n3 === '') {
+    alert('Preencha todas as notas!');
+    return;
+  }
+
+  const notas = [Number(n1), Number(n2), Number(n3)];
+
+  if (notas.some(nota =>
+    !Number.isFinite(nota) || nota < 0 || nota > 10
+  )) {
+    alert('As notas devem estar entre 0 e 10!');
+    return;
+  }
+
+  // Atualiza as notas
+  aluno.setNota1(notas[0]);
+  aluno.setNota2(notas[1]);
+  aluno.setNota3(notas[2]);
+
+  // Recalcula média e situação
+  aluno.gerarMedia();
+  aluno.gerarEstado(aluno.media);
+
+  // Atualiza a média no modal
+  document.getElementById('modal-media').textContent =
+    'Média: ' + aluno.media.toFixed(2);
+
+  // Atualiza a situação no modal
+  document.getElementById('modal-situacao').textContent =
+    'Situação: ' + aluno.estado;
+
+  // Atualiza a listagem de alunos
+  atualizarListaAlunos();
+
+  alert('Notas atualizadas com sucesso!');
+}

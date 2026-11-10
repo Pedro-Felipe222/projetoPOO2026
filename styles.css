@@ -292,3 +292,18 @@ h2 {
   margin-top: 0;
   margin-bottom: 20px;
 }
+
+.modal-conteudo label {
+  display: block;
+  margin-top: 12px;
+  font-weight: bold;
+}
+
+.modal-conteudo input {
+  margin-top: 5px;
+}
+
+.modal-conteudo .btn-salvar {
+  width: 100%;
+  margin-top: 15px;
+}
