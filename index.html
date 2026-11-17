@@ -5,8 +5,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="./styles.css" />
-
+  <script src="./Pessoa.js" defer></script>
+  <script src="./Professor.js" defer></script>
   <script src="./Aluno.js" defer></script>
+  <script src="./Turma.js" defer></script>
   <script src="./script.js" defer></script>
 
   <title>SIGAA 2</title>
@@ -40,6 +42,18 @@
 
     <label for="nome-professor">Nome do professor:</label>
     <input id="nome-professor" type="text"/>
+
+    <label for="matricula-professor">Matricula do professor:</label>
+    <input id="matricula-professor" type="number"/>
+
+    <label for="estado-professor">Estado do professor:</label>
+    <input id="estado-professor" type="text"/>
+    
+    <label for="formacao-professor">Formação do professor:</label>
+    <input id="formacao-professor" type="text"/>
+    
+    <label for="email-professor">E-mail do professor:</label>
+    <input id="email-professor" type="text"/>
 
     <label for="nome-curso">Nome do curso:</label>
     <input id="nome-curso" type="text"/>
@@ -90,7 +104,7 @@
       <input id="nome" type="text" placeholder="Nome do aluno" />
 
       <label for="matricula">Matrícula:</label>
-      <input id="matricula" type="text"
+      <input id="matricula" type="number"
         placeholder="Ex: 202612345" />
 
       <label for="frequencia">

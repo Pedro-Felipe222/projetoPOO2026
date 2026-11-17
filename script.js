@@ -43,6 +43,10 @@ function mostrarTurmas() {
 function salvarTurma() {
   const nome = document.getElementById('nome-turma').value.trim();
   const professor = document.getElementById('nome-professor').value.trim();
+  const professor = document.getElementById('matricula-professor').value.trim();
+  const professor = document.getElementById('estado-professor').value.trim();
+  const professor = document.getElementById('formacao-professor').value.trim();
+  const professor = document.getElementById('email-professor').value.trim();
   const curso = document.getElementById('nome-curso').value.trim();
 
   if (nome === '' || professor === '' || curso === '') {
@@ -51,7 +55,7 @@ function salvarTurma() {
   }
 
   // Cria uma nova turma
-  const novaTurma = new Turma(nome, professor, curso);
+  const novaTurma = new Turma(nome, professor, matricula, estado, formacao, email, curso);
 
   // Adiciona ao array principal
   turmas.push(novaTurma);
@@ -61,6 +65,10 @@ function salvarTurma() {
   // Limpa os campos
   document.getElementById('nome-turma').value = '';
   document.getElementById('nome-professor').value = '';
+  document.getElementById('matricula-professor').value = '';
+  document.getElementById('estado-professor').value = '';
+  document.getElementById('formacao-professor').value = '';
+  document.getElementById('email-professor').value = '';
   document.getElementById('nome-curso').value = '';
 
   // Abre a listagem de turmas
@@ -190,7 +198,7 @@ function salvar() {
   }
 
   let nome = document.getElementById('nome').value.trim();
-  let matricula = document.getElementById('matricula').value.trim();
+  let matricula = document.getElementById('matricula').value;
   let frequencia = document.getElementById('frequencia').value;
   let n1 = document.getElementById('n1').value;
   let n2 = document.getElementById('n2').value;
@@ -292,7 +300,7 @@ function atualizarListaAlunos() {
       'Nome: ' + aluno.getNome() +
       ' | Matrícula: ' + aluno.getMatricula() +
       ' | Média: ' + aluno.media.toFixed(2) +
-      ' | Situação: ' + aluno.estado;
+      ' | Situação: ' + aluno.getEstado();
 
     const botao = document.createElement('button');
 
@@ -345,7 +353,7 @@ function detalharAluno(indice) {
     '/20 aulas (' + resultado.percentual + '%)';
 
   document.getElementById('modal-situacao').textContent =
-    'Situação: ' + aluno.estado;
+    'Situação: ' + aluno.getEstado();
 
   document.getElementById('modal-detalhes').classList.add('ativo');
 }
@@ -407,7 +415,7 @@ function salvarAlteracoes() {
 
   // Atualiza a situação no modal
   document.getElementById('modal-situacao').textContent =
-    'Situação: ' + aluno.estado;
+    'Situação: ' + aluno.getEstado();
 
   // Atualiza a listagem de alunos
   atualizarListaAlunos();
